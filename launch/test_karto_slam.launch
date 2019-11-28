@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
+		<remap from="scan" to="front_laser"/>
+		<param name="odom_frame" value="odom"/>
+		<param name="map_update_interval" value="5"/>
+		<param name="resolution" value="0.025"/>
+	</node>
+
+
+	<!-- <include file="$(find husky_viz)/launch/view_robot.launch"/> -->
+
+</launch>
