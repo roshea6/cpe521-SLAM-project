@@ -1,14 +1,28 @@
 <?xml version="1.0"?>
 <launch>
 
-	<node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
-		<remap from="scan" to="front_laser"/>
-		<param name="odom_frame" value="odom"/>
-		<param name="map_update_interval" value="5"/>
-		<param name="resolution" value="0.025"/>
-	</node>
+	<!-- Command line arguements to specify which SLAM package and laser we'll use -->
+	<arg name="gmapping" default="false"/>
+	<arg name="karto" default="false"/>
+	<arg name="scan" default="front_laser"/>
+	<arg name="config" default="gmapping_setup"/>
+
+	<group if="$(arg karto)">
+		<node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
+			<remap from="scan" to="front_laser"/>
+			<param name="odom_frame" value="odom"/>
+			<param name="map_update_interval" value="5"/>
+			<param name="resolution" value="0.025"/>
+		</node>
+	</group>
+
+	<group if="$(arg gmapping)">
+		<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
+			<remap from="scan" to="$(arg scan)"/>
+		</node>	
+	</group>	
 
 
-	<!-- <include file="$(find husky_viz)/launch/view_robot.launch"/> -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find cpe_slam)/rviz_config/gmapping_setup.rviz"></node>
 
 </launch>
