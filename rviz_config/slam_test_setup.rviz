@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /Map1
+        - /LaserScan1
         - /Odometry1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -94,7 +95,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.10000000149011612
       Style: Flat Squares
       Topic: /front_laser
       Unreliable: false
@@ -128,7 +129,7 @@ Visualization Manager:
         Axes Radius: 0.10000000149011612
         Color: 255; 25; 0
         Head Length: 0.30000001192092896
-        Head Radius: 0.10000000149011612
+        Head Radius: 0.4000000059604645
         Shaft Length: 1
         Shaft Radius: 0.05000000074505806
         Value: Arrow
@@ -200,4 +201,4 @@ Window Geometry:
     collapsed: false
   Width: 1200
   X: 192
-  Y: 133
+  Y: 103

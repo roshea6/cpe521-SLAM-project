@@ -5,24 +5,28 @@
 	<arg name="gmapping" default="false"/>
 	<arg name="karto" default="false"/>
 	<arg name="scan" default="front_laser"/>
-	<arg name="config" default="gmapping_setup"/>
+	<arg name="config" default="slam_test_setup"/>
 
+	<!-- If the karto arg was set to true then launch the karto SLAM node -->
 	<group if="$(arg karto)">
 		<node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
-			<remap from="scan" to="front_laser"/>
+			<remap from="scan" to="$(arg scan)"/> <!-- Remap topic to the correct one-->
 			<param name="odom_frame" value="odom"/>
 			<param name="map_update_interval" value="5"/>
 			<param name="resolution" value="0.025"/>
 		</node>
 	</group>
 
+
+	<!-- If the gmapping arg was set to true then launch the gmapping SLAM node -->
 	<group if="$(arg gmapping)">
 		<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
-			<remap from="scan" to="$(arg scan)"/>
+			<remap from="scan" to="$(arg scan)"/> <!-- Remap topic to the correct one-->
 		</node>	
 	</group>	
 
 
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find cpe_slam)/rviz_config/gmapping_setup.rviz"></node>
+	<!-- Launch the rviz node using the passed in rviz file -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find cpe_slam)/rviz_config/$(arg config).rviz"></node>
 
 </launch>
