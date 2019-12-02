@@ -12,7 +12,7 @@
 		<node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
 			<remap from="scan" to="$(arg scan)"/> <!-- Remap topic to the correct one-->
 			<param name="odom_frame" value="odom"/>
-			<param name="map_update_interval" value="5"/>
+			<param name="map_update_interval" value=".1"/>
 			<param name="resolution" value="0.025"/>
 		</node>
 	</group>
@@ -22,6 +22,8 @@
 	<group if="$(arg gmapping)">
 		<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
 			<remap from="scan" to="$(arg scan)"/> <!-- Remap topic to the correct one-->
+			<param name="odom_frame" value="odom"/>
+			<param name="map_update_interval" value=".1"/>
 		</node>	
 	</group>	
 
