@@ -6,6 +6,8 @@
 	<arg name="karto" default="false"/>
 	<arg name="scan" default="front_laser"/>
 	<arg name="config" default="slam_test_setup"/>
+	
+	<param name="use_sim_time" value="true"/>
 
 	<!-- If the karto arg was set to true then launch the karto SLAM node -->
 	<group if="$(arg karto)">
